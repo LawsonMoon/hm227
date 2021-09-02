@@ -38,6 +38,7 @@
 </template>
 
 <script>
+// import local from '../../utils/local'
 export default {
   data () {
     const checkMobile = (rule, value, callback) => {
@@ -49,8 +50,8 @@ export default {
     }
     return {
       LoginForm: {
-        mobile: '',
-        code: ''
+        mobile: '13911111111',
+        code: '246810'
       },
       LoginRules: {
         mobile: [
@@ -66,13 +67,29 @@ export default {
   },
   methods: {
     login () {
-      this.$refs.dataForm.validate((valid) => {
+      // 对整个表单进行校验
+      this.$refs.dataForm.validate(async valid => {
         if (valid) {
-          this.$http.post('authorizations', this.LoginForm).then(res => {
+          // 校验成功  进行登录（发请求）
+          // post(url,参数对象)
+          // get(url,{params:参数对象})
+          // this.$http.post('authorizations', this.LoginForm).then(res => {
+          //   // 成功 res 是响应对象  res.data 是响应主体
+          //   // 保存用户信息（token）
+          //   const jsonStr = JSON.stringify(res.data.data)
+          //   window.sessionStorage.setItem('hm', jsonStr)
+          //   this.$router.push('/')
+          // }).catch(() => {
+          //   // 失败 提示
+          // })
+          try {
+            const { data: { data } } = await this.$http.post('authorizations', this.LoginForm)
+            const jsonStr = JSON.stringify(data)
+            window.sessionStorage.setItem('hm', jsonStr)
             this.$router.push('/')
-          }).catch(() => {
+          } catch (e) {
             this.$message.error('手机号或验证码错误')
-          })
+          }
         }
       })
     }

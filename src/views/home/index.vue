@@ -46,15 +46,19 @@
       <el-header>
         <span class="el-icon-s-fold icon" @click="toggleMenu"></span>
         <span class="text">江苏传智播客科技教育有限公司</span>
-        <el-dropdown class="down">
+        <el-dropdown class="down" @command="handlClick">
           <span class="el-dropdown-link">
-            <img class="headIcon" src="../../assets/avatar.jpg" alt="" />
-            <span class="userName">用户名</span>
+            <img class="headIcon" :src="photo" alt="" />
+            <span class="userName">{{ name }}</span>
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-unlock">退出登录</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-setting" command="setting"
+              >个人设置</el-dropdown-item
+            >
+            <el-dropdown-item icon="el-icon-unlock" command="logout"
+              >退出登录</el-dropdown-item
+            >
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
@@ -69,15 +73,31 @@
 export default {
   data () {
     return {
-      isOpen: true
+      isOpen: true,
+      photo: '',
+      name: ''
     }
   },
   methods: {
     toggleMenu () {
       this.isOpen = !this.isOpen
+    },
+    logout () {
+      window.sessionStorage.removeItem('hm')
+      this.$router.push('/login')
+    },
+    setting () {
+      this.$router.push('/setting')
+    },
+    handlClick (command) {
+      this[command]()
     }
+  },
+  created () {
+    const user = JSON.parse(window.sessionStorage.getItem('hm')) || ''
+    this.photo = user.photo
+    this.name = user.name
   }
-
 }
 </script>
 
@@ -112,6 +132,7 @@ export default {
   width: 30px;
   height: 30px;
   vertical-align: middle;
+  border-radius: 50%;
 }
 .userName {
   margin-left: 5px;
