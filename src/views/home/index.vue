@@ -1,9 +1,9 @@
 <template>
   <el-container class="home-container">
-    <el-aside :width="isOpen ? '200px' : '64px'">
+    <el-aside :width="isOpen ? '200px' : '64px'" class="mennu-aside">
       <div class="logo" :class="{ smallLogo: !isOpen }"></div>
       <el-menu
-        default-active="/"
+        :default-active="$route.path"
         background-color="#002033"
         text-color="#fff"
         active-text-color="#ffd04b"
@@ -43,7 +43,7 @@
       </el-menu>
     </el-aside>
     <el-container>
-      <el-header>
+      <el-header class="menu-header">
         <span class="el-icon-s-fold icon" @click="toggleMenu"></span>
         <span class="text">江苏传智播客科技教育有限公司</span>
         <el-dropdown class="down" @command="handlClick">
@@ -109,10 +109,10 @@ export default {
   left: 0;
   right: 0;
 }
-.el-aside {
+.mennu-aside {
   background: #002033;
 }
-.el-header {
+.menu-header {
   border-bottom: 1px solid #ddd;
   line-height: 60px;
 }

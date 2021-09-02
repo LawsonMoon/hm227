@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <el-card>
+    <el-card class="login-card">
       <img class="index-img" src="../../assets/logo_index.png" alt="" />
       <el-form
         ref="dataForm"
@@ -106,7 +106,7 @@ export default {
   left: 0;
   right: 0;
 }
-.el-card {
+.login-card {
   width: 400px;
   height: 350px;
   position: absolute;

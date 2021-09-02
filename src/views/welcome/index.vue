@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img src="../../assets/welcome.jpg" alt="" />
+    <img class="wel-img" src="../../assets/welcome.jpg" alt="" />
   </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style>
-img {
+.wel-img {
   display: block;
   margin: 0 auto;
 }
