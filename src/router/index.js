@@ -6,6 +6,7 @@ import Welcome from '../views/welcome'
 import Notfoud from '../views/404'
 // import local from '../utils'
 import Article from '../views/article'
+import Image from '../views/image'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,9 @@ const router = new VueRouter({
     }, {
       path: '/article',
       component: Article
+    }, {
+      path: '/image',
+      component: Image
     }]
   }, {
     path: '*',
